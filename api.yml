@@ -8,20 +8,20 @@ components:
   schemas:
     Item:
       allOf:
-        $ref: '#/components/schemas/PartialItem'
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-        quantity:
-          type: integer
-      required:
-        - id
-        - name
-        - quantity
+        - $ref: '#/components/schemas/PartialItem'
+        - type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            name:
+              type: string
+            quantity:
+              type: integer
+          required:
+            - id
+            - name
+            - quantity
     PartialItem:
       type: object
       properties:
