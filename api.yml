@@ -94,7 +94,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#components/schemas/item'
+                  $ref: '#components/schemas/Item'
         '401':
           $ref: '#/components/responses/NoApiKey'
         '403':
@@ -118,7 +118,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#components/schemas/item'
+                  $ref: '#components/schemas/Item'
         '401':
           $ref: '#/components/responses/NoApiKey'
         '403':
