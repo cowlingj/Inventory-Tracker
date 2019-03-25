@@ -1,155 +1,169 @@
-openapi: 3.0.0
+swagger: '2.0'
 info:
-  version: 0.0.1
+  version: 0.0.3
   title: Inventory Tracker API
   description: The API that the Inventory Tracker clients communicate with
 
-components:
-  schemas:
-    Item:
-      allOf:
-        - $ref: '#/components/schemas/PartialItem'
-        - type: object
-          properties:
-            id:
-              type: integer
-              readOnly: true
-            name:
-              type: string
-            quantity:
-              type: integer
-          required:
-            - id
-            - name
-            - quantity
-    PartialItem:
-      type: object
+securityDefinitions:
+  ApiKey:
+    type: apiKey
+    in: header
+    name: X-API-Key
+
+security:
+- ApiKey: []
+
+x-amazon-apigateway-request-validators:
+  both: 
+    validateRequestBody: true
+    validateRequestParameters: true
+
+x-amazon-apigateway-api-key-source: 'HEADER'
+x-amazon-apigateway-request-validator: 'both'
+
+definitions:
+
+  Item:
+    allOf:
+    - "$ref": "#/definitions/PartialItem"
+    - type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
         name:
           type: string
         quantity:
           type: integer
       required:
-        - name
-        - quantity
-  securitySchemes:
-    ApiKey:
-      type: apiKey
-      in: header
-      name: x-api-key
-  responses:
-    NoApiKey:
-      description: a valid api key was not provided
+      - id
+      - name
+      - quantity
 
-security:
-  - ApiKey: []
+  PartialItem:
+    type: object
+    properties:
+      name:
+        type: string
+      quantity:
+        type: integer
+    required:
+    - name
+    - quantity
+  NoApiKey:
+    description: a valid api key was not provided
 
 paths:
-  /list:
+
+  "/list":
+
     get:
       description: returns items in the list
       parameters:
-        - name: offset
-          in: query
-          description: get items from this offset
-          default: 0
-          required: false
-          schema:
-            type: integer
-        - name: limit
-          in: query
-          description: limits the number of items returned
-          default: 25
-          required: false
-          schema:
-            type: integer
+      - name: offset
+        in: query
+        description: get items from this offset
+        default: 0
+        required: false
+        type: integer
+      - name: limit
+        in: query
+        description: limits the number of items returned
+        default: 25
+        required: false
+        type: integer
       responses:
         '200':
           description: successfully returned items in the list
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Item'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Item"
         '401':
-          $ref: '#/components/responses/NoApiKey'
+          "$ref": "#/definitions/NoApiKey"
         '413':
           description: too many items requested
-    put:
+      x-amazon-apigateway-integration: # TODO
+
+    post:
       description: adds items to the list
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/PartialItem'
+      parameters:
+      - required: true
+        name: body
+        in: body
+        schema:
+          type: array
+          items:
+            "$ref": "#/definitions/PartialItem"
       responses:
         '200':
           description: item successfully added
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Item'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Item"
         '401':
-          $ref: '#/components/responses/NoApiKey'
+          "$ref": "#/definitions/NoApiKey"
         '403':
           description: one or more of the partial items were invalid
         '413':
           description: attempted to add too many items
+      x-amazon-apigateway-integration: # TODO
+
     patch:
       description: replaces items in the list
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Item'
+      parameters:
+      - name: body
+        in: body
+        schema:
+          type: array
+          items:
+            "$ref": "#/definitions/Item"
       responses:
         '200':
           description: all replacements were successful
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Item'
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Item"
         '401':
-          $ref: '#/components/responses/NoApiKey'
+          "$ref": "#/definitions/NoApiKey"
         '403':
           description: one or more of the items are invalid
         '404':
           description: one or more items being replaced were not found
         '413':
           description: attempted to replace too many items
+      x-amazon-apigateway-integration: # TODO
+
     delete:
       description: removes items in the list
       parameters:
-        - name: items
-          in: query
-          schema:
-            type: array
-            items:
-              type: integer
+      - name: items
+        in: query
+        type: array
+        items:
+          type: integer
       responses:
         '204':
           description: item successfully removed
         '401':
-          $ref: '#/components/responses/NoApiKey'
+          "$ref": "#/definitions/NoApiKey"
         '404':
           description: no item found to delete
         '413':
           description: attempted to delete too many items
-  /report:
+      x-amazon-apigateway-integration: # TODO
+
+  "/report":
+
     get:
       description: returns a report on the list over a given period
+      parameters: []
       responses:
         '401':
-          $ref: '#/components/responses/NoApiKey'
+          "$ref": "#/definitions/NoApiKey"
         '501':
           description: not implemented in this version
+      x-amazon-apigateway-integration: # TODO
+
