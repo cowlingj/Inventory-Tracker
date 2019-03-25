@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 0.0.3
+  version: 0.0.4
   title: Inventory Tracker API
   description: The API that the Inventory Tracker clients communicate with
 
@@ -110,7 +110,7 @@ paths:
           description: attempted to add too many items
       x-amazon-apigateway-integration: # TODO
 
-    patch:
+    put:
       description: replaces items in the list
       parameters:
       - name: body
