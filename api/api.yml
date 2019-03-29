@@ -25,6 +25,8 @@ paths:
         schema:
           type: integer
           default: 25
+      security:
+        - ApiKey: []
       responses:
         '200':
           description: successfully returned items in the list
@@ -53,6 +55,8 @@ paths:
               items:
                 "$ref": "#/components/schemas/Item"
         required: false
+      security:
+        - ApiKey: []
       responses:
         '200':
           description: all replacements were successful
@@ -87,6 +91,8 @@ paths:
               items:
                 "$ref": "#/components/schemas/PartialItem"
         required: true
+      security:
+        - ApiKey: []
       responses:
         '200':
           description: item successfully added
@@ -119,6 +125,8 @@ paths:
           type: array
           items:
             type: integer
+      security:
+        - ApiKey: []
       responses:
         '204':
           description: item successfully removed
@@ -138,6 +146,8 @@ paths:
   "/report":
     get:
       description: returns a report on the list over a given period
+      security:
+        - ApiKey: []
       responses:
         '401':
           "$ref": "#/definitions/NoApiKey"
