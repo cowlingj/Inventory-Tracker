@@ -7,7 +7,3 @@ output "lambda_arns" {
     invoke_get_report = "${aws_lambda_function.stub_lambda.invoke_arn}"
   }
 }
-
-output "debug" {
-  value = "${data.template_file.lambda_iam.rendered}"
-}

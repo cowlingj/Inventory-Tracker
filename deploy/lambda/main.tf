@@ -1,20 +1,20 @@
 resource "aws_iam_role" "lambda_role" {
   name = "inventory_tracker_lambda_role"
-  assume_role_policy = "${data.template_file.lambda_iam.rendered}"
+  assume_role_policy = "${data.template_file.lambda_role_policy.rendered}"
   tags = {
     Project = "inventory_tracker"
   }
 }
 
-# resource "aws_iam_policy" "lambda_policy" {
-#   name = ""
-#   policy = "todo" #todo
-# }
+resource "aws_iam_policy" "lambda_policy" {
+  name = "inventory_tracker_service_policy"
+  policy = "${data.template_file.lambda_policy.rendered}"
+}
 
-# resource "aws_iam_role_policy_attachment" "attach_role_to_policy" {
-#   role = "${aws_iam_role.lambda_role.name}"
-#   policy_arn = "${aws_iam_policy.lambda_policy.arn}"
-# }
+resource "aws_iam_role_policy_attachment" "attach_role_to_policy" {
+  role = "${aws_iam_role.lambda_role.name}"
+  policy_arn = "${aws_iam_policy.lambda_policy.arn}"
+}
 
 resource "aws_lambda_function" "stub_lambda" {
   filename         = "${data.archive_file.lambda_zip.output_path}"

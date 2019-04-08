@@ -4,8 +4,15 @@ data "archive_file" "lambda_zip" {
     output_path = "${path.root}/${var.build_dir}/stub.zip"
 }
 
-data "template_file" "lambda_iam" {
-   template = "${file("${path.module}/lambda-iam.json")}"
+data "template_file" "lambda_role_policy" {
+   template = "${file("${path.module}/lambda-service-role.json")}"
+   vars = {
+       table_arn = "${var.table_arn}"
+   }
+}
+
+data "template_file" "lambda_policy" {
+   template = "${file("${path.module}/lambda-policy.json")}"
    vars = {
        table_arn = "${var.table_arn}"
    }

@@ -1,3 +1,3 @@
-output "build_dir" {
-  value = "${var.build_dir}"
+output "api_key" {
+  value = "${module.api-gateway.api_key}"
 }

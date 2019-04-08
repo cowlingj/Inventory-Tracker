@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Effect": "Allow",
+          "Action": [
+              "dynamodb:BatchGetItem",
+              "dynamodb:BatchWriteItem",
+              "dynamodb:ConditionCheckItem",
+              "dynamodb:TagResource",
+              "dynamodb:UntagResource",
+              "dynamodb:PutItem",
+              "dynamodb:DeleteItem",
+              "dynamodb:GetItem",
+              "dynamodb:Scan",
+              "dynamodb:ListTagsOfResource",
+              "dynamodb:Query",
+              "dynamodb:UpdateItem"
+          ],
+          "Resource": "${table_arn}"
+      }
+  ]
+}
