@@ -1,3 +1,2 @@
-build_dir = "./build"
-src_dir = "../src"
+build_dir = "build"
 api_spec = "../api/api.yml"

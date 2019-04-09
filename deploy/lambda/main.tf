@@ -17,11 +17,23 @@ resource "aws_iam_role_policy_attachment" "attach_role_to_policy" {
 }
 
 resource "aws_lambda_function" "stub_lambda" {
-  filename         = "${data.archive_file.lambda_zip.output_path}"
+  filename         = "${path.root}/${var.build_dir}/stub.zip"
   function_name    = "inventory_list_stub"
   role             = "${aws_iam_role.lambda_role.arn}"
   handler          = "stub.stub"
-  source_code_hash = "${data.archive_file.lambda_zip.output_base64sha256}"
+  source_code_hash = "${filebase64sha256("${path.root}/${var.build_dir}/stub.zip")}"
+  runtime          = "nodejs8.10"
+  tags = {
+    Project = "inventory_tracker"
+  }
+}
+
+resource "aws_lambda_function" "get_list" {
+  filename         = "${path.root}/${var.build_dir}/get-list.zip"
+  function_name    = "inventory_list_get_list"
+  role             = "${aws_iam_role.lambda_role.arn}"
+  handler          = "get-list.handler"
+  source_code_hash = "${filebase64sha256("${path.root}/${var.build_dir}/get-list.zip")}"
   runtime          = "nodejs8.10"
   tags = {
     Project = "inventory_tracker"

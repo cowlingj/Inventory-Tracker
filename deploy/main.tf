@@ -22,8 +22,7 @@ module "dynamo-db" {
 
 module "lambda" {
   source = "./lambda"
-  src_dir = "../src"
-  build_dir = "./build"
+  build_dir = "${var.build_dir}"
   table_arn = "${module.dynamo-db.table_arn}"
 }
 
