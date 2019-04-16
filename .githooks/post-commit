@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e
+
+TMP_DIR=$(mktemp -d)
+
+echo "running prettier post commit"
+npx prettier --list-different '**/*' > "$TMP_DIR/prettier.tmp"
+npm run prettier
+git diff --name-only > "$TMP_DIR/diff.tmp"
+grep -f "$TMP_DIR/prettier.tmp" "$TMP_DIR/diff.tmp" > "$TMP__DIR/intersection.tmp"
+FILES_PRETTIED=$(wc -l "$TMP_DIR/intersection.tmp" | grep -o '^[0-9]\+')
+
+if [ "$FILES_PRETTIED" -gt "0" ]; then
+  cat "$TMP_DIR/intersection.tmp" | tr '\n' ' ' | xargs git add
+  git commit -m "Prettier"
+fi
+
+rm -r "$TMP_DIR"
+
+echo "finished prettier post commit"

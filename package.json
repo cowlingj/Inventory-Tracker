@@ -11,7 +11,7 @@
     "buildDeploy": "npm run build && npm run deploy",
     "bd": "npm run buildDeploy",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier": "prettier --ignore-path .prettierignore --config .prettierrc.yml **/*",
+    "prettier": "prettier --write --ignore-path .prettierignore --config .prettierrc.yml $(npx prettier --list-different '*/**' | tr -s '\n' ' ')",
     "p": "npm run prettier" 
   },
   "keywords": [
