@@ -7,3 +7,5 @@ output "lambda_arns" {
     invoke_get_report = "${aws_lambda_function.stub_lambda.invoke_arn}"
   }
 }
+
+# todo update arns

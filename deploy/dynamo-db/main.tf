@@ -24,3 +24,5 @@ resource "aws_dynamodb_table" "inventory-list-store" {
     projection_type = "ALL"
   }
 }
+
+# TODO: report table

@@ -1,0 +1,7 @@
+/deploy
+/dist
+/node_modules
+.gitignore
+/package-lock.json
+*.txt
+*.log

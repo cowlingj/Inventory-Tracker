@@ -39,3 +39,5 @@ resource "aws_lambda_function" "get_list" {
     Project = "inventory_tracker"
   }
 }
+
+# todo, the other lambdas

@@ -10,7 +10,9 @@
     "d": "npm run deploy",
     "buildDeploy": "npm run build && npm run deploy",
     "bd": "npm run buildDeploy",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --ignore-path .prettierignore --config .prettierrc.yml **/*",
+    "p": "npm run prettier" 
   },
   "keywords": [
     "lambda"
@@ -18,7 +20,8 @@
   "author": "cowlingj",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.437.0"
+    "aws-sdk": "^2.437.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -28,6 +31,7 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-syntax-async-functions": "^6.13.0",
     "filemanager-webpack-plugin": "^2.0.5",
+    "prettier": "^1.17.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   }

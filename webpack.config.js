@@ -3,7 +3,7 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 module.exports = {
   entry: {
-    "get-list": './src/get-list.js',
+    "get-list": './src/list/read/index.js',
     "stub": './src/stub.js'
   },
   output: {
