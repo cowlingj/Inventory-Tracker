@@ -12,7 +12,7 @@
     "bd": "npm run buildDeploy",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prettier": "prettier --write --ignore-path .prettierignore --config .prettierrc.yml $(npx prettier --list-different '*/**' | tr -s '\n' ' ')",
-    "p": "npm run prettier" 
+    "p": "npm run prettier"
   },
   "keywords": [
     "lambda"
@@ -30,6 +30,7 @@
     "@babel/preset-env": "^7.4.3",
     "babel-loader": "^8.0.5",
     "babel-plugin-syntax-async-functions": "^6.13.0",
+    "core-js": "^3.0.1",
     "filemanager-webpack-plugin": "^2.0.5",
     "prettier": "^1.17.0",
     "webpack": "^4.29.6",
