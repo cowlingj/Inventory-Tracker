@@ -1,5 +1,5 @@
 export default class extends Error {
-  constructor(msg) {
-    super(msg)
-  }
+    constructor(msg) {
+        super(msg)
+    }
 }

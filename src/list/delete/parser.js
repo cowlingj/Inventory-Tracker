@@ -1,10 +1,9 @@
-import ParseError from "../../util/errors/parse-error";
+import ParseError from "../../util/errors/parse-error"
 
-export default function (event) {
-
+export default function(event) {
     if (!event.queryStringParameters || !event.queryStringParameters.id) {
-      throw new ParseError(`can not parse event ${event}`)
+        throw new ParseError(`can not parse event ${event}`)
     } else {
-      return { id: event.queryStringParameters.id }
+        return { id: event.queryStringParameters.id }
     }
 }

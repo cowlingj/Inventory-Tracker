@@ -1,49 +1,51 @@
 import "../../../config/aws-config"
 import { DynamoDB } from "aws-sdk"
-import parser from "./parser";
+import parser from "./parser"
 
 export const handler = async (event, ctx) => {
+    try {
+        const parsed = parser(event)
 
-  try {
+        const client = new DynamoDB.DocumentClient()
 
-  const parsed = parser(event)
+        const updates = {
+            id: {
+                Value: parsed.id,
+                Action: "ADD",
+            },
+            name: parsed.name
+                ? { Value: parsed.name, Action: "ADD" }
+                : undefined,
+            quantity: parsed.quantity
+                ? { Value: parsed.quantity, Action: "ADD" }
+                : undefined,
+        }
 
-  const client = new DynamoDB.DocumentClient()
+        return await new Promise((resolve, reject) => {
+            client.update(
+                {
+                    Key: { HashKey: ":id" },
+                    AttributeUpdates: updates,
+                },
+                (err, data) => {
+                    if (err) {
+                        return reject(err)
+                    } else {
+                        return resolve(data)
+                    }
+                }
+            )
+        }).then(data => {
+            return {
+                statusCode: 200,
+                body: data,
+            }
+        })
+    } catch (e) {
+        if (e instanceof ParseError) {
+            return { statusCode: 400, body: e.message }
+        }
 
-  const updates = {
-    id: {
-      Value: parsed.id,
-      Action: 'ADD'
-    },
-    name: parsed.name? { Value: parsed.name, Action: 'ADD' } : undefined,
-    quantity: parsed.quantity? { Value: parsed.quantity, Action: 'ADD' } : undefined
-  }
-  
-
-  return await new Promise((resolve, reject) => {
-    
-    client.update({
-      Key: { HashKey : ':id' },
-      AttributeUpdates: updates
-    }, (err, data) => {
-      if (err) {
-        return reject(err)
-      } else {
-        return resolve(data)
-      }
-    })
-  }).then((data) => {
-    return {
-      statusCode: 200,
-      body: data
+        return { statusCode: 500, body: e }
     }
-  })
-} catch (e) {
-
-  if (e instanceof ParseError) {
-    return { statusCode: 400, body: e.message }
-  }
-
-  return { statusCode: 500, body: e }
-}
 }
