@@ -1,39 +1,39 @@
 {
-  "name": "inventory_tracker_handler",
-  "version": "0.0.1",
-  "description": "Handling functions for inventory tracker api calls",
-  "main": "src/index.js",
-  "scripts": {
-    "build": "webpack --mode production",
-    "b": "npm run build",
-    "deploy": "cd deploy && terraform apply",
-    "d": "npm run deploy",
-    "buildDeploy": "npm run build && npm run deploy",
-    "bd": "npm run buildDeploy",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier": "prettier --write --ignore-path .prettierignore --config .prettierrc.yml $(npx prettier --list-different '*/**' | tr -s '\n' ' ')",
-    "p": "npm run prettier"
-  },
-  "keywords": [
-    "lambda"
-  ],
-  "author": "cowlingj",
-  "license": "MIT",
-  "dependencies": {
-    "aws-sdk": "^2.437.0",
-    "uuid": "^3.3.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-transform-async-to-generator": "^7.4.0",
-    "@babel/polyfill": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "babel-loader": "^8.0.5",
-    "babel-plugin-syntax-async-functions": "^6.13.0",
-    "core-js": "^3.0.1",
-    "filemanager-webpack-plugin": "^2.0.5",
-    "prettier": "^1.17.0",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
-  }
+    "name": "inventory_tracker_handler",
+    "version": "0.0.1",
+    "description": "Handling functions for inventory tracker api calls",
+    "main": "src/index.js",
+    "scripts": {
+        "build": "webpack --mode production",
+        "b": "npm run build",
+        "deploy": "cd deploy && terraform apply",
+        "d": "npm run deploy",
+        "buildDeploy": "npm run build && npm run deploy",
+        "bd": "npm run buildDeploy",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prettier": "./scripts/prettier.sh",
+        "p": "npm run prettier"
+    },
+    "keywords": [
+        "lambda"
+    ],
+    "author": "cowlingj",
+    "license": "MIT",
+    "dependencies": {
+        "aws-sdk": "^2.437.0",
+        "uuid": "^3.3.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.4.3",
+        "@babel/plugin-transform-async-to-generator": "^7.4.0",
+        "@babel/polyfill": "^7.4.3",
+        "@babel/preset-env": "^7.4.3",
+        "babel-loader": "^8.0.5",
+        "babel-plugin-syntax-async-functions": "^6.13.0",
+        "core-js": "^3.0.1",
+        "filemanager-webpack-plugin": "^2.0.5",
+        "prettier": "^1.17.0",
+        "webpack": "^4.29.6",
+        "webpack-cli": "^3.3.0"
+    }
 }

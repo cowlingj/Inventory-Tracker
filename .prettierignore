@@ -5,6 +5,7 @@
 /.githooks
 /.prettierignore
 /package-lock.json
+*.sh
 *.txt
 *.log
 /tmp

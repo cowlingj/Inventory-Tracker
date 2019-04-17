@@ -17,7 +17,7 @@ export const handler = async (event, ctx) => {
                 : undefined,
         }
 
-        const data =  await new Promise((resolve, reject) => {
+        const data = await new Promise((resolve, reject) => {
             client.update(
                 {
                     Key: { id: parsed.id },
@@ -32,12 +32,11 @@ export const handler = async (event, ctx) => {
                 }
             )
         })
-        
+
         return {
-                statusCode: 200,
-                body: data,
-            }
-            
+            statusCode: 200,
+            body: data,
+        }
     } catch (e) {
         if (e instanceof ParseError) {
             return { statusCode: 400, body: e.message }

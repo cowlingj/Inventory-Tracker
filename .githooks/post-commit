@@ -1,21 +1,39 @@
 #!/usr/bin/env bash
 
-set -e
+LOCKFILE="post-commit.lock"
 
-TMP_DIR=$(mktemp -d)
-
-echo "running prettier post commit"
-npx prettier --list-different '**/*' > "$TMP_DIR/prettier.tmp"
-npm run prettier
-git diff --name-only > "$TMP_DIR/diff.tmp"
-grep -f "$TMP_DIR/prettier.tmp" "$TMP_DIR/diff.tmp" > "$TMP__DIR/intersection.tmp"
-FILES_PRETTIED=$(wc -l "$TMP_DIR/intersection.tmp" | grep -o '^[0-9]\+')
-
-if [ "$FILES_PRETTIED" -gt "0" ]; then
-  cat "$TMP_DIR/intersection.tmp" | tr '\n' ' ' | xargs git add
-  git commit -m "Prettier"
+exec 999>"$LOCKFILE"
+if ! flock -n -E 1 -e 999; then
+  exit 0
 fi
 
-rm -r "$TMP_DIR"
+clean_up() {
+  rm -r "$TMP_DIR"
+  flock -u 999
+  rm "$LOCKFILE"
+}
+
+echo "running prettier post commit"
+TMP_DIR=$(mktemp -d)
+
+npx prettier --list-different '**/*' > "$TMP_DIR/prettier.tmp"
+git diff-tree --no-commit-id --name-only -r HEAD > "$TMP_DIR/diff.tmp"
+grep -f "$TMP_DIR/prettier.tmp" "$TMP_DIR/diff.tmp" | tee "$TMP_DIR/intersection.tmp"
+
+FILES_FORMATTED="$(wc -l "$TMP_DIR/intersection.tmp" | grep -o '^[0-9]\+')"
+
+if [ "$FILES_FORMATTED" = "0" ]; then
+  echo "no files from last commit need formatting"
+  clean_up
+  exit 0
+fi
+
+npm run prettier
+
+cat "$TMP_DIR/intersection.tmp" | tr '\n' ' ' | xargs git add
+sed '1s/^/Prettier ('"$FILES_FORMATTED"' files)\n\n/' "$TMP_DIR/prettier.tmp" |
+  git commit -F - > /dev/null
+
+clean_up
 
 echo "finished prettier post commit"
