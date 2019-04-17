@@ -9,22 +9,18 @@ export const handler = async (event, ctx) => {
         const client = new DynamoDB.DocumentClient()
 
         const updates = {
-            id: {
-                Value: parsed.id,
-                Action: "ADD",
-            },
             name: parsed.name
-                ? { Value: parsed.name, Action: "ADD" }
+                ? { Value: parsed.name, Action: "PUT" }
                 : undefined,
             quantity: parsed.quantity
-                ? { Value: parsed.quantity, Action: "ADD" }
+                ? { Value: parsed.quantity, Action: "PUT" }
                 : undefined,
         }
 
-        return await new Promise((resolve, reject) => {
+        const data =  await new Promise((resolve, reject) => {
             client.update(
                 {
-                    Key: { HashKey: ":id" },
+                    Key: { id: parsed.id },
                     AttributeUpdates: updates,
                 },
                 (err, data) => {
@@ -35,12 +31,13 @@ export const handler = async (event, ctx) => {
                     }
                 }
             )
-        }).then(data => {
-            return {
+        })
+        
+        return {
                 statusCode: 200,
                 body: data,
             }
-        })
+            
     } catch (e) {
         if (e instanceof ParseError) {
             return { statusCode: 400, body: e.message }
