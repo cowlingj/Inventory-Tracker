@@ -3,14 +3,14 @@ openapi: 3.0.1
 info:
     title: Inventory Tracker API
     description: The API that the Inventory Tracker clients communicate with
-    version: 0.0.5
+    version: 0.0.6
 servers:
     - url: "/"
 security:
     - ApiKey: []
 paths:
-    "/list":
-        "/read":
+    
+        "/list/read":
             post:
                 description: returns items in the list
                 parameters:
@@ -46,7 +46,7 @@ paths:
                     httpMethod: GET
                     type: aws
                     uri: "${list_get_uri}"
-        "/update":
+        "/list/update":
             post:
                 description: replaces items in the list
                 requestBody:
@@ -83,7 +83,7 @@ paths:
                     httpMethod: PUT
                     type: aws
                     uri: "${list_put_uri}"
-        "/create":
+        "/list/create":
             post:
                 description: adds items to the list
                 requestBody:
@@ -117,7 +117,7 @@ paths:
                     httpMethod: POST
                     type: aws
                     uri: "${list_post_uri}"
-        "/delete":
+        "/list/delete":
             post:
                 description: removes items in the list
                 parameters:
@@ -147,8 +147,7 @@ paths:
                     httpMethod: DELETE
                     type: aws
                     uri: "${list_delete_uri}"
-    "/report":
-        "/read":
+        "/report/read":
             post:
                 description: returns a report on the list over a given period
                 security:
