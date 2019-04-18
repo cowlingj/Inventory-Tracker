@@ -9,159 +9,158 @@ servers:
 security:
     - ApiKey: []
 paths:
-    
-        "/list/read":
-            post:
-                description: returns items in the list
-                parameters:
-                    - name: offset
-                      in: query
-                      description: get items from this offset
-                      schema:
-                          type: integer
-                          default: 0
-                    - name: limit
-                      in: query
-                      description: limits the number of items returned
-                      schema:
-                          type: integer
-                          default: 25
-                security:
-                    - ApiKey: []
-                responses:
-                    "200":
-                        description: successfully returned items in the list
-                        content:
-                            "application/json":
-                                schema:
-                                    type: array
-                                    items:
-                                        "$ref": "#/components/schemas/Item"
-                    "401":
-                        "$ref": "#/definitions/NoApiKey"
-                    "413":
-                        description: too many items requested
-                        content: {}
-                x-amazon-apigateway-integration:
-                    httpMethod: GET
-                    type: aws
-                    uri: "${list_get_uri}"
-        "/list/update":
-            post:
-                description: replaces items in the list
-                requestBody:
+    "/list/read":
+        post:
+            description: returns items in the list
+            parameters:
+                - name: offset
+                  in: query
+                  description: get items from this offset
+                  schema:
+                      type: integer
+                      default: 0
+                - name: limit
+                  in: query
+                  description: limits the number of items returned
+                  schema:
+                      type: integer
+                      default: 25
+            security:
+                - ApiKey: []
+            responses:
+                "200":
+                    description: successfully returned items in the list
                     content:
                         "application/json":
                             schema:
                                 type: array
                                 items:
                                     "$ref": "#/components/schemas/Item"
-                    required: false
-                security:
-                    - ApiKey: []
-                responses:
-                    "200":
-                        description: all replacements were successful
-                        content:
-                            "application/json":
-                                schema:
-                                    type: array
-                                    items:
-                                        "$ref": "#/components/schemas/Item"
-                    "401":
-                        "$ref": "#/definitions/NoApiKey"
-                    "403":
-                        description: one or more of the items are invalid
-                        content: {}
-                    "404":
-                        description: one or more items being replaced were not found
-                        content: {}
-                    "413":
-                        description: attempted to replace too many items
-                        content: {}
-                x-amazon-apigateway-integration:
-                    httpMethod: PUT
-                    type: aws
-                    uri: "${list_put_uri}"
-        "/list/create":
-            post:
-                description: adds items to the list
-                requestBody:
+                "401":
+                    "$ref": "#/definitions/NoApiKey"
+                "413":
+                    description: too many items requested
+                    content: {}
+            x-amazon-apigateway-integration:
+                httpMethod: GET
+                type: aws
+                uri: "${list_get_uri}"
+    "/list/update":
+        post:
+            description: replaces items in the list
+            requestBody:
+                content:
+                    "application/json":
+                        schema:
+                            type: array
+                            items:
+                                "$ref": "#/components/schemas/Item"
+                required: false
+            security:
+                - ApiKey: []
+            responses:
+                "200":
+                    description: all replacements were successful
                     content:
                         "application/json":
                             schema:
                                 type: array
                                 items:
-                                    "$ref": "#/components/schemas/PartialItem"
-                    required: true
-                security:
-                    - ApiKey: []
-                responses:
-                    "200":
-                        description: item successfully added
-                        content:
-                            "application/json":
-                                schema:
-                                    type: array
-                                    items:
-                                        "$ref": "#/components/schemas/Item"
-                    "401":
-                        "$ref": "#/definitions/NoApiKey"
-                    "403":
-                        description: one or more of the partial items were invalid
-                        content: {}
-                    "413":
-                        description: attempted to add too many items
-                        content: {}
-                x-amazon-apigateway-integration:
-                    httpMethod: POST
-                    type: aws
-                    uri: "${list_post_uri}"
-        "/list/delete":
-            post:
-                description: removes items in the list
-                parameters:
-                    - name: items
-                      in: query
-                      style: form
-                      explode: false
-                      schema:
-                          type: array
-                          items:
-                              type: integer
-                security:
-                    - ApiKey: []
-                responses:
-                    "204":
-                        description: item successfully removed
-                        content: {}
-                    "401":
-                        "$ref": "#/definitions/NoApiKey"
-                    "404":
-                        description: no item found to delete
-                        content: {}
-                    "413":
-                        description: attempted to delete too many items
-                        content: {}
-                x-amazon-apigateway-integration:
-                    httpMethod: DELETE
-                    type: aws
-                    uri: "${list_delete_uri}"
-        "/report/read":
-            post:
-                description: returns a report on the list over a given period
-                security:
-                    - ApiKey: []
-                responses:
-                    "401":
-                        "$ref": "#/definitions/NoApiKey"
-                    "501":
-                        description: not implemented in this version
-                        content: {}
-                x-amazon-apigateway-integration:
-                    httpMethod: GET
-                    type: aws
-                    uri: "${report_get_uri}"
+                                    "$ref": "#/components/schemas/Item"
+                "401":
+                    "$ref": "#/definitions/NoApiKey"
+                "403":
+                    description: one or more of the items are invalid
+                    content: {}
+                "404":
+                    description: one or more items being replaced were not found
+                    content: {}
+                "413":
+                    description: attempted to replace too many items
+                    content: {}
+            x-amazon-apigateway-integration:
+                httpMethod: PUT
+                type: aws
+                uri: "${list_put_uri}"
+    "/list/create":
+        post:
+            description: adds items to the list
+            requestBody:
+                content:
+                    "application/json":
+                        schema:
+                            type: array
+                            items:
+                                "$ref": "#/components/schemas/PartialItem"
+                required: true
+            security:
+                - ApiKey: []
+            responses:
+                "200":
+                    description: item successfully added
+                    content:
+                        "application/json":
+                            schema:
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/Item"
+                "401":
+                    "$ref": "#/definitions/NoApiKey"
+                "403":
+                    description: one or more of the partial items were invalid
+                    content: {}
+                "413":
+                    description: attempted to add too many items
+                    content: {}
+            x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws
+                uri: "${list_post_uri}"
+    "/list/delete":
+        post:
+            description: removes items in the list
+            parameters:
+                - name: items
+                  in: query
+                  style: form
+                  explode: false
+                  schema:
+                      type: array
+                      items:
+                          type: integer
+            security:
+                - ApiKey: []
+            responses:
+                "204":
+                    description: item successfully removed
+                    content: {}
+                "401":
+                    "$ref": "#/definitions/NoApiKey"
+                "404":
+                    description: no item found to delete
+                    content: {}
+                "413":
+                    description: attempted to delete too many items
+                    content: {}
+            x-amazon-apigateway-integration:
+                httpMethod: DELETE
+                type: aws
+                uri: "${list_delete_uri}"
+    "/report/read":
+        post:
+            description: returns a report on the list over a given period
+            security:
+                - ApiKey: []
+            responses:
+                "401":
+                    "$ref": "#/definitions/NoApiKey"
+                "501":
+                    description: not implemented in this version
+                    content: {}
+            x-amazon-apigateway-integration:
+                httpMethod: GET
+                type: aws
+                uri: "${report_get_uri}"
 components:
     schemas:
         Item:
