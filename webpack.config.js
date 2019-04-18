@@ -7,7 +7,7 @@ module.exports = {
         "post-list": "./src/list/create/index.js",
         "put-list": "./src/list/update/index.js",
         "delete-list": "./src/list/delete/index.js",
-        stub: "./src/stub.js",
+        "get-report": "./src/report/read/index.js",
     },
     output: {
         libraryTarget: "commonjs",
@@ -50,8 +50,8 @@ module.exports = {
                         destination: "deploy/build/delete-list.zip",
                     },
                     {
-                        source: "dist/stub.js",
-                        destination: "deploy/build/stub.zip",
+                        source: "dist/get-report.js",
+                        destination: "deploy/build/get-report.zip",
                     },
                 ],
             },
