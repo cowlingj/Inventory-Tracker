@@ -6,6 +6,17 @@ variable "table_arn" {
   type = "string"
 }
 
-variable "lambda_args" {
+variable "lambda_arns" {
   type = "map"
 }
+
+variable "api_name" {
+  type = "string"
+  default = "Inventory Tracker API"
+}
+
+variable "api_description" {
+  type = "string"
+  default = "The API that the Inventory Tracker clients communicate with"
+}
+

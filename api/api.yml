@@ -1,8 +1,8 @@
 ---
 openapi: 3.0.1
 info:
-    title: Inventory Tracker API
-    description: The API that the Inventory Tracker clients communicate with
+    title: ${title}
+    description: ${description}
     version: 0.0.5
 servers:
     - url: "/"
@@ -42,8 +42,9 @@ paths:
                     description: too many items requested
                     content: {}
             x-amazon-apigateway-integration:
-                httpMethod: GET
-                type: aws
+                httpMethod: POST
+                passthroughBehavior: when_no_templates
+                type: aws_proxy
                 uri: "${list_get_uri}"
         put:
             description: replaces items in the list
@@ -78,8 +79,9 @@ paths:
                     description: attempted to replace too many items
                     content: {}
             x-amazon-apigateway-integration:
-                httpMethod: PUT
-                type: aws
+                httpMethod: POST
+                passthroughBehavior: when_no_templates
+                type: aws_proxy
                 uri: "${list_put_uri}"
         post:
             description: adds items to the list
@@ -112,7 +114,8 @@ paths:
                     content: {}
             x-amazon-apigateway-integration:
                 httpMethod: POST
-                type: aws
+                passthroughBehavior: when_no_templates
+                type: aws_proxy
                 uri: "${list_post_uri}"
         delete:
             description: removes items in the list
@@ -140,8 +143,9 @@ paths:
                     description: attempted to delete too many items
                     content: {}
             x-amazon-apigateway-integration:
-                httpMethod: DELETE
-                type: aws
+                httpMethod: POST
+                passthroughBehavior: when_no_templates
+                type: aws_proxy
                 uri: "${list_delete_uri}"
     "/report":
         get:
@@ -155,8 +159,9 @@ paths:
                     description: not implemented in this version
                     content: {}
             x-amazon-apigateway-integration:
-                httpMethod: GET
-                type: aws
+                httpMethod: POST
+                passthroughBehavior: when_no_templates
+                type: aws_proxy
                 uri: "${report_get_uri}"
 components:
     schemas:

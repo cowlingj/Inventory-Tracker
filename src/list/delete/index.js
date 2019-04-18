@@ -13,7 +13,6 @@ export const handler = async (event, ctx) => {
                 {
                     TableName: "inventory-list-store-dev",
                     Key: {
-                        // HashKey: id?
                         id: parsed.id,
                     },
                 },
@@ -29,13 +28,13 @@ export const handler = async (event, ctx) => {
 
         return {
             statusCode: 200,
-            body: data,
+            body: JSON.stringify(data),
         }
     } catch (e) {
         if (e instanceof ParseError) {
             return { statusCode: 400, body: e.message }
         }
 
-        return { statusCode: 500, body: e }
+        return { statusCode: 500, body: e.message }
     }
 }
