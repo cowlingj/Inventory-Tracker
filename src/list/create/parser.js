@@ -10,6 +10,6 @@ export default function(event) {
 
         return { name: body.name, quantity: body.quantity }
     } catch (e) {
-        throw new ParseError(`could not parse event: ${event}`)
+        throw new ParseError(`could not parse event: ${JSON.stringify(event)}`)
     }
 }
