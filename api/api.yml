@@ -52,7 +52,7 @@ paths:
                 content:
                     "application/json":
                         schema:
-                                "$ref": "#/components/schemas/Item"
+                            "$ref": "#/components/schemas/Item"
                 required: false
             security:
                 - ApiKey: []
@@ -83,7 +83,7 @@ paths:
                 content:
                     "application/json":
                         schema:
-                                "$ref": "#/components/schemas/PartialItem"
+                            "$ref": "#/components/schemas/PartialItem"
                 required: true
             security:
                 - ApiKey: []
@@ -111,7 +111,7 @@ paths:
                 - name: item
                   in: query
                   schema:
-                          type: integer
+                      type: integer
             security:
                 - ApiKey: []
             responses:

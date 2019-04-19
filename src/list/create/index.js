@@ -21,7 +21,6 @@ export const handler = async (event, ctx) => {
             },
         }
         const data = await new Promise((resolve, reject) => {
-
             const id = uuid.v1()
 
             client.update(
@@ -49,6 +48,9 @@ export const handler = async (event, ctx) => {
             return { statusCode: 400, body: e.message }
         }
 
-        return { statusCode: 500, body: `err: ${e.message} parsed: ${JSON.stringify(event, null, 2)}` }
+        return {
+            statusCode: 500,
+            body: `err: ${e.message} parsed: ${JSON.stringify(event, null, 2)}`,
+        }
     }
 }
