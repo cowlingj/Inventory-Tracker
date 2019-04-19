@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
     title: ${title}
     description: ${description}
-    version: 0.0.5
+    version: 0.0.6
 servers:
     - url: "/"
 security:
@@ -13,12 +13,12 @@ paths:
         get:
             description: returns items in the list
             parameters:
-                - name: offset
+                - name: from
                   in: query
                   description: get items from this offset
+                  required: false
                   schema:
-                      type: integer
-                      default: 0
+                      type: string
                 - name: limit
                   in: query
                   description: limits the number of items returned
@@ -47,36 +47,30 @@ paths:
                 type: aws_proxy
                 uri: "${list_get_uri}"
         put:
-            description: replaces items in the list
+            description: replaces an item in the list
             requestBody:
                 content:
                     "application/json":
                         schema:
-                            type: array
-                            items:
                                 "$ref": "#/components/schemas/Item"
                 required: false
             security:
                 - ApiKey: []
             responses:
                 "200":
-                    description: all replacements were successful
+                    description: replacement was successful
                     content:
                         "application/json":
                             schema:
-                                type: array
                                 items:
                                     "$ref": "#/components/schemas/Item"
                 "401":
                     "$ref": "#/definitions/NoApiKey"
                 "403":
-                    description: one or more of the items are invalid
+                    description: the item is invalid
                     content: {}
                 "404":
-                    description: one or more items being replaced were not found
-                    content: {}
-                "413":
-                    description: attempted to replace too many items
+                    description: the item being replaced was not found
                     content: {}
             x-amazon-apigateway-integration:
                 httpMethod: POST
@@ -84,13 +78,11 @@ paths:
                 type: aws_proxy
                 uri: "${list_put_uri}"
         post:
-            description: adds items to the list
+            description: adds an item to the list
             requestBody:
                 content:
                     "application/json":
                         schema:
-                            type: array
-                            items:
                                 "$ref": "#/components/schemas/PartialItem"
                 required: true
             security:
@@ -101,16 +93,12 @@ paths:
                     content:
                         "application/json":
                             schema:
-                                type: array
                                 items:
                                     "$ref": "#/components/schemas/Item"
                 "401":
                     "$ref": "#/definitions/NoApiKey"
                 "403":
-                    description: one or more of the partial items were invalid
-                    content: {}
-                "413":
-                    description: attempted to add too many items
+                    description: the partial items was invalid
                     content: {}
             x-amazon-apigateway-integration:
                 httpMethod: POST
@@ -118,15 +106,11 @@ paths:
                 type: aws_proxy
                 uri: "${list_post_uri}"
         delete:
-            description: removes items in the list
+            description: removes an item in the list
             parameters:
-                - name: items
+                - name: item
                   in: query
-                  style: form
-                  explode: false
                   schema:
-                      type: array
-                      items:
                           type: integer
             security:
                 - ApiKey: []
@@ -138,9 +122,6 @@ paths:
                     "$ref": "#/definitions/NoApiKey"
                 "404":
                     description: no item found to delete
-                    content: {}
-                "413":
-                    description: attempted to delete too many items
                     content: {}
             x-amazon-apigateway-integration:
                 httpMethod: POST

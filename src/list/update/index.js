@@ -1,5 +1,5 @@
 import "../../../config/aws-config"
-import { DynamoDB } from "aws-sdk"
+import DynamoDB from "aws-sdk/clients/dynamodb"
 import parser from "./parser"
 
 export const handler = async (event, ctx) => {
@@ -20,6 +20,7 @@ export const handler = async (event, ctx) => {
         const data = await new Promise((resolve, reject) => {
             client.update(
                 {
+                    TableName: "inventory-list-store-dev",
                     Key: { id: parsed.id },
                     AttributeUpdates: updates,
                 },
