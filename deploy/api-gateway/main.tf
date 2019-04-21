@@ -61,7 +61,7 @@ resource "aws_api_gateway_usage_plan" "usage_plan" {
 }
 
 resource "aws_api_gateway_api_key" "key" {
-  name = "${terraform.workspace}_key"
+  name = "inventory_tracker_${terraform.workspace}_key"
 }
 
 resource "aws_api_gateway_usage_plan_key" "usage_plan_key" {

@@ -29,7 +29,6 @@ module "lambda" {
 
 module "api-gateway" {
   source = "./api-gateway"
-  table_arn = "${module.dynamo-db.table_arn}"
   api_spec = "${var.api_spec}"
   lambda_arns = {
     invoke_get_list = "${module.lambda.lambda_arns["invoke_get_list"]}"
@@ -44,4 +43,13 @@ module "api-gateway" {
     get_report = "${module.lambda.lambda_arns["get_report"]}"
   }
 }
+
+module "config-file" {
+  source = "./config-file"
+  api_key = "${module.api-gateway.api_key}"
+  base_url = "${module.api-gateway.base_url}"
+  postman_dir = "${var.postman_dir}"
+}
+
+
 

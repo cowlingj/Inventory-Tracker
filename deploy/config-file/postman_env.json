@@ -1,0 +1,20 @@
+{
+	"name": "Inventory Tracker ${env}",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "${baseUrl}",
+			"type": "text",
+			"description": "base url to all endpioints",
+			"enabled": true
+		},
+		{
+			"key": "apiKey",
+			"value": "${apiKey}",
+			"type": "text",
+			"description": "api key required to communicate with the endpoints",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment"
+}

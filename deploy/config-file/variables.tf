@@ -1,11 +1,13 @@
-variable "build_dir" {
+variable "api_key" {
   type = "string"
 }
 
-variable "api_spec" {
+variable "base_url" {
   type = "string"
 }
 
 variable "postman_dir" {
   type = "string"
 }
+
+
