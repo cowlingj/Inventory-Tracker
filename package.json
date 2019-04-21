@@ -12,7 +12,9 @@
         "bd": "npm run buildDeploy",
         "test": "echo \"Error: no test specified\" && exit 1",
         "prettier": "./scripts/prettier.sh",
-        "p": "npm run prettier"
+        "p": "npm run prettier",
+        "teardown": "cd deploy && terraform destroy",
+        "t": "npm run teardown"
     },
     "keywords": [
         "lambda"
