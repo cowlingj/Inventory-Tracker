@@ -4,7 +4,7 @@ export default function(event) {
     try {
         const body = JSON.parse(event.body)
 
-        if (!body || !body.id) {
+        if (!body || typeof body.id != "string") {
             throw new Error(`could not parse event: ${JSON.stringify(event)}`)
         }
 

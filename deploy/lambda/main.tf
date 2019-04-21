@@ -26,6 +26,12 @@ resource "aws_lambda_function" "get_list" {
   tags = {
     Project = "inventory_tracker"
   }
+
+  environment = {
+    variables = {
+      LIST_TABLE_NAME = "${var.list_table_name}"
+    }
+  }
 }
 
 resource "aws_lambda_function" "post_list" {
@@ -37,6 +43,12 @@ resource "aws_lambda_function" "post_list" {
   runtime          = "nodejs8.10"
   tags = {
     Project = "inventory_tracker"
+  }
+
+  environment = {
+    variables = {
+      LIST_TABLE_NAME = "${var.list_table_name}"
+    }
   }
 }
 
@@ -50,6 +62,12 @@ resource "aws_lambda_function" "put_list" {
   tags = {
     Project = "inventory_tracker"
   }
+
+  environment = {
+    variables = {
+      LIST_TABLE_NAME = "${var.list_table_name}"
+    }
+  }
 }
 
 resource "aws_lambda_function" "delete_list" {
@@ -61,6 +79,12 @@ resource "aws_lambda_function" "delete_list" {
   runtime          = "nodejs8.10"
   tags = {
     Project = "inventory_tracker"
+  }
+
+  environment = {
+    variables = {
+      LIST_TABLE_NAME = "${var.list_table_name}"
+    }
   }
 }
 

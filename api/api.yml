@@ -3,7 +3,7 @@ openapi: 3.0.1
 info:
     title: ${title}
     description: ${description}
-    version: 0.0.6
+    version: 0.0.7
 servers:
     - url: "/"
 security:
@@ -156,7 +156,7 @@ components:
                   type: object
                   properties:
                       id:
-                          type: integer
+                          type: string
                       name:
                           type: string
                       quantity:

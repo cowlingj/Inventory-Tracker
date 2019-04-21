@@ -3,10 +3,10 @@ export default function(event) {
         event.queryStringParameters && event.queryStringParameters.offset
             ? event.queryStringParameters.offset
             : 0
-    const limit =
+    const from =
         event.queryStringParameters && event.queryStringParameters.limit
             ? event.queryStringParameters.limit
             : 25
 
-    return { limit, offset }
+    return { from, offset }
 }

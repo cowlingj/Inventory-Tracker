@@ -1,4 +1,4 @@
-import "../../../config/aws-config"
+import config from "../../../config/aws-config"
 import DynamoDB from "aws-sdk/clients/dynamodb"
 import parser from "./parser"
 
@@ -11,7 +11,7 @@ export const handler = async (event, ctx) => {
         const data = await new Promise((resolve, reject) => {
             client.delete(
                 {
-                    TableName: "inventory-list-store-dev",
+                    TableName: config.tables.list,
                     Key: {
                         id: parsed.id,
                     },

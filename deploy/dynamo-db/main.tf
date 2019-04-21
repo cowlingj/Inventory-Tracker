@@ -3,14 +3,13 @@ resource "aws_dynamodb_table" "inventory-list-store" {
   read_capacity = 1
   write_capacity = 1
   hash_key = "id"
-  range_key = "name"
   tags = {
     Project = "inventory_tracker"
   }
 
   attribute {
     name = "id"
-    type = "N"
+    type = "S"
   }
 
   attribute {
@@ -18,10 +17,13 @@ resource "aws_dynamodb_table" "inventory-list-store" {
     type = "S"
   }
 
-  local_secondary_index {
+  global_secondary_index {
     name = "name-index"
+    hash_key = "id"
     range_key = "name"
     projection_type = "ALL"
+    read_capacity = 1
+    write_capacity = 1
   }
 }
 

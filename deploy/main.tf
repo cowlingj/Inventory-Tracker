@@ -23,7 +23,8 @@ module "dynamo-db" {
 module "lambda" {
   source = "./lambda"
   build_dir = "${var.build_dir}"
-  table_arn = "${module.dynamo-db.table_arn}"
+  list_table_arn = "${module.dynamo-db.list_table_arn}"
+  list_table_name = "${module.dynamo-db.list_table_name}"
 }
 
 module "api-gateway" {
