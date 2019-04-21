@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "2f1f7e42-5424-a508-5d3a-7a1d306dd37c",
+		"name": "InventoryTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/list",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"list"
+					]
+				},
+				"description": "Trigger AWS Gateway via calling the api with the api key"
+			},
+			"response": []
+		},
+		{
+			"name": "Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"test2\",\n\t\"quantity\": 100000\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/list",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"id\": \"0\",\n            \"quantity\": 100,\n            \"name\": \"test\"\n        }"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/list",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/list?id=0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"list"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
