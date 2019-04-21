@@ -9,17 +9,18 @@ export const handler = async (event, ctx) => {
 
         const client = new DynamoDB.DocumentClient()
 
-        const update = ""
-          + (parsed.name? `SET #n = :n` : "")
-          + (parsed.quantity? "SET quantity = :q" : "")
-        
-          const names = {
-            "#n": parsed.name? "name" : undefined
+        const update =
+            "" +
+            (parsed.name ? `SET #n = :n` : "") +
+            (parsed.quantity ? "SET quantity = :q" : "")
+
+        const names = {
+            "#n": parsed.name ? "name" : undefined,
         }
-        
+
         const values = {
-            ":n": parsed.name? parsed.name : undefined,
-            ":q": parsed.quantity? parsed.quantity : undefined 
+            ":n": parsed.name ? parsed.name : undefined,
+            ":q": parsed.quantity ? parsed.quantity : undefined,
         }
 
         const data = await new Promise((resolve, reject) => {
@@ -31,7 +32,7 @@ export const handler = async (event, ctx) => {
                     ExpressionAttributeNames: names,
                     ExpressionAttributeValues: values,
                     ConditionExpression: "attribute_exists(id)",
-                    ReturnValues: "ALL_NEW"
+                    ReturnValues: "ALL_NEW",
                 },
                 (err, data) => {
                     if (err) {

@@ -147,18 +147,18 @@ paths:
 components:
     schemas:
         Item:
-                  required:
-                      - id
-                      - name
-                      - quantity
-                  type: object
-                  properties:
-                      id:
-                          type: string
-                      name:
-                          type: string
-                      quantity:
-                          type: integer
+            required:
+                - id
+                - name
+                - quantity
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                quantity:
+                    type: integer
         ItemPrototype:
             required:
                 - name

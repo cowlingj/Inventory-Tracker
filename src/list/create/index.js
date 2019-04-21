@@ -10,7 +10,6 @@ export const handler = async (event, ctx) => {
     try {
         const parsed = parser(event)
         const data = await new Promise((resolve, reject) => {
-
             const updates = {
                 id: uuid.v1(),
                 name: parsed.name,
