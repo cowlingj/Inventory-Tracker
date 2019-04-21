@@ -1,6 +1,7 @@
 import config from "../../../config/aws-config"
 import DynamoDB from "aws-sdk/clients/dynamodb"
 import parser from "./parser"
+import ParseError from "../../util/errors/parse-error"
 
 export const handler = async (event, ctx) => {
     try {
@@ -8,13 +9,17 @@ export const handler = async (event, ctx) => {
 
         const client = new DynamoDB.DocumentClient()
 
-        const updates = {
-            name: parsed.name
-                ? { Value: parsed.name, Action: "PUT" }
-                : undefined,
-            quantity: parsed.quantity
-                ? { Value: parsed.quantity, Action: "PUT" }
-                : undefined,
+        const update = ""
+          + (parsed.name? `SET #n = :n` : "")
+          + (parsed.quantity? "SET quantity = :q" : "")
+        
+          const names = {
+            "#n": parsed.name? "name" : undefined
+        }
+        
+        const values = {
+            ":n": parsed.name? parsed.name : undefined,
+            ":q": parsed.quantity? parsed.quantity : undefined 
         }
 
         const data = await new Promise((resolve, reject) => {
@@ -22,7 +27,11 @@ export const handler = async (event, ctx) => {
                 {
                     TableName: config.tables.list,
                     Key: { id: parsed.id },
-                    AttributeUpdates: updates,
+                    UpdateExpression: update,
+                    ExpressionAttributeNames: names,
+                    ExpressionAttributeValues: values,
+                    ConditionExpression: "attribute_exists(id)",
+                    ReturnValues: "ALL_NEW"
                 },
                 (err, data) => {
                     if (err) {

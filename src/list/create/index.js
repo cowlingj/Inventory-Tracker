@@ -10,24 +10,17 @@ export const handler = async (event, ctx) => {
     try {
         const parsed = parser(event)
         const data = await new Promise((resolve, reject) => {
-            const id = uuid.v1()
 
             const updates = {
-                name: {
-                    Value: parsed.name,
-                    Action: "PUT",
-                },
-                quantity: {
-                    Value: parsed.quantity,
-                    Action: "PUT",
-                },
+                id: uuid.v1(),
+                name: parsed.name,
+                quantity: parsed.quantity,
             }
 
-            client.update(
+            client.put(
                 {
                     TableName: config.tables.list,
-                    Key: { id },
-                    AttributeUpdates: updates,
+                    Item: updates,
                     ConditionExpression: "attribute_not_exists(id)",
                 },
                 (err, data) => {

@@ -52,7 +52,7 @@ paths:
                 content:
                     "application/json":
                         schema:
-                            "$ref": "#/components/schemas/Item"
+                            "$ref": "#/components/schemas/PartialItem"
                 required: false
             security:
                 - ApiKey: []
@@ -83,7 +83,7 @@ paths:
                 content:
                     "application/json":
                         schema:
-                            "$ref": "#/components/schemas/PartialItem"
+                            "$ref": "#/components/schemas/ItemPrototype"
                 required: true
             security:
                 - ApiKey: []
@@ -147,9 +147,7 @@ paths:
 components:
     schemas:
         Item:
-            allOf:
-                - "$ref": "#/components/schemas/PartialItem"
-                - required:
+                  required:
                       - id
                       - name
                       - quantity
@@ -161,12 +159,23 @@ components:
                           type: string
                       quantity:
                           type: integer
-        PartialItem:
+        ItemPrototype:
             required:
                 - name
                 - quantity
             type: object
             properties:
+                name:
+                    type: string
+                quantity:
+                    type: integer
+        PartialItem:
+            required:
+                - id
+            type: object
+            properties:
+                id:
+                    type: string
                 name:
                     type: string
                 quantity:
