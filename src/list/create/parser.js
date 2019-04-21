@@ -4,7 +4,11 @@ export default function(event) {
     try {
         const body = JSON.parse(event.body)
 
-        if (!body || typeof body.name != "string" || typeof body.quantity != "number") {
+        if (
+            !body ||
+            typeof body.name != "string" ||
+            typeof body.quantity != "number"
+        ) {
             console.log(`validation failed for: ${JSON.stringify(body)}`)
             throw new Error()
         }

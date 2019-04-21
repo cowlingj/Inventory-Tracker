@@ -10,7 +10,6 @@ export const handler = async (event, ctx) => {
     try {
         const parsed = parser(event)
         const data = await new Promise((resolve, reject) => {
-            
             const id = uuid.v1()
 
             const updates = {
@@ -29,7 +28,7 @@ export const handler = async (event, ctx) => {
                     TableName: config.tables.list,
                     Key: { id },
                     AttributeUpdates: updates,
-                    ConditionExpression: "attribute_not_exists(id)"
+                    ConditionExpression: "attribute_not_exists(id)",
                 },
                 (err, data) => {
                     if (err) {
