@@ -12,3 +12,4 @@
 *.tmp
 *.lock
 /postman
+generated/

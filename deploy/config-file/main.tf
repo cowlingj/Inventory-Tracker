@@ -5,5 +5,5 @@ resource "local_file" "postman" {
 
 resource "local_file" "api" {
   sensitive_content = "${var.api}"
-  filename = "${var.clients_dir}/api_${terraform.workspace}.yml"
+  filename = "${var.clients_dir}/generated/api_${terraform.workspace}.yml"
 }
