@@ -10,4 +10,12 @@ variable "postman_dir" {
   type = "string"
 }
 
+variable "api" {
+  type = "string"
+}
+
+variable "clients_dir" {
+  type = "string"
+}
+
 

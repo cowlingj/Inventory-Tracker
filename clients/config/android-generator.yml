@@ -1,0 +1,10 @@
+modelPackage: tk.jonathancowling.inventorytracker.client.model
+apiPackage: tk.jonathancowling.inventorytracker.client.api
+invokerPackage: tk.jonathancowling.inventorytracker.client
+groupId: tk.jonathancowling
+artifactId: inventorytracker
+artifactVersion: 0.0.1
+useAndroidMavenGradlePlugin: false
+androidGradleVersion: null
+androidSdkVersion: 28
+androidBuildToolsVersion: 28.0.3

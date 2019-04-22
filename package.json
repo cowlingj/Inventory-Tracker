@@ -14,7 +14,9 @@
         "prettier": "./scripts/prettier.sh",
         "p": "npm run prettier",
         "teardown": "cd deploy && terraform destroy",
-        "t": "npm run teardown"
+        "t": "npm run teardown",
+        "generate": "",
+        "g": "npm run generate"
     },
     "keywords": [
         "lambda"

@@ -1,7 +1,3 @@
-variable "api_spec" {
-  type = "string"
-}
-
 variable "lambda_arns" {
   type = "map"
 }

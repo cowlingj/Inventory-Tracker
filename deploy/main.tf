@@ -29,7 +29,6 @@ module "lambda" {
 
 module "api-gateway" {
   source = "./api-gateway"
-  api_spec = "${var.api_spec}"
   lambda_arns = {
     invoke_get_list = "${module.lambda.lambda_arns["invoke_get_list"]}"
     invoke_put_list = "${module.lambda.lambda_arns["invoke_put_list"]}"
@@ -48,7 +47,9 @@ module "config-file" {
   source = "./config-file"
   api_key = "${module.api-gateway.api_key}"
   base_url = "${module.api-gateway.base_url}"
+  api = "${module.api-gateway.api}"
   postman_dir = "${var.postman_dir}"
+  clients_dir = "${var.clients_dir}"
 }
 
 
