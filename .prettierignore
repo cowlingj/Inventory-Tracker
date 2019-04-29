@@ -13,3 +13,4 @@
 *.lock
 /postman
 generated/
+.gitmodules
