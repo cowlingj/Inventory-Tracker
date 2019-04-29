@@ -1,5 +1,5 @@
 data "template_file" "api" {
-  template = "${file("${path.module}/api.yml")}"
+  template = "${file("${path.module}/api/api.yml")}"
   vars = {
     title = "${var.api_name}",
     description = "${var.api_description}",

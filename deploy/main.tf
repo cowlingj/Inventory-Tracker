@@ -47,7 +47,6 @@ module "config-file" {
   source = "./config-file"
   api_key = "${module.api-gateway.api_key}"
   base_url = "${module.api-gateway.base_url}"
-  api = "${module.api-gateway.api}"
   postman_dir = "${var.postman_dir}"
   clients_dir = "${var.clients_dir}"
 }

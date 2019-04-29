@@ -15,8 +15,8 @@
         "p": "npm run prettier",
         "teardown": "cd deploy && terraform destroy",
         "t": "npm run teardown",
-        "generate": "",
-        "g": "npm run generate"
+        "init": "chmod -R +x scripts/",
+        "i": "npm run init"
     },
     "keywords": [
         "lambda"
