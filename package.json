@@ -15,7 +15,7 @@
         "p": "npm run prettier",
         "teardown": "cd deploy && terraform destroy",
         "t": "npm run teardown",
-        "init": "chmod -R +x scripts/",
+        "init": "chmod -R +x scripts/; git config core.hooksPath .githooks",
         "i": "npm run init"
     },
     "keywords": [
