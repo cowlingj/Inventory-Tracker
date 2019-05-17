@@ -29,7 +29,10 @@ export const handler = async (event, ctx) => {
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ items: data.Items, next: data.LastEvaluatedKey }),
+            body: JSON.stringify({
+                items: data.Items,
+                next: data.LastEvaluatedKey,
+            }),
         }
     } catch (e) {
         if (e instanceof ParseError) {
