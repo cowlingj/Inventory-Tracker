@@ -1,6 +1,7 @@
 import config from "../../../../config/aws-config"
 import DynamoDB from "aws-sdk/clients/dynamodb"
 import parser from "./parser"
+import ParseError from "../../../util/errors/parse-error"
 
 export const handler = async (event, ctx) => {
     const parsed = parser(event)
@@ -28,7 +29,7 @@ export const handler = async (event, ctx) => {
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ items: data.Items, next: LastEvaluatedKey }),
+            body: JSON.stringify({ items: data.Items, next: data.LastEvaluatedKey }),
         }
     } catch (e) {
         if (e instanceof ParseError) {

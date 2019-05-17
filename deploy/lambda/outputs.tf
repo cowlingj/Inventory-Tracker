@@ -12,3 +12,13 @@ output "lambda_arns" {
     get_report = "${aws_lambda_function.get_report.arn}"
   }
 }
+
+output "lambda_names" {
+  value = {
+    get_list = "${aws_lambda_function.get_list.function_name}"
+    post_list = "${aws_lambda_function.post_list.function_name}"
+    put_list = "${aws_lambda_function.put_list.function_name}"
+    delete_list = "${aws_lambda_function.delete_list.function_name}"
+    get_report = "${aws_lambda_function.get_report.function_name}"
+  }
+}

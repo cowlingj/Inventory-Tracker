@@ -1,6 +1,7 @@
 import config from "../../../../config/aws-config"
 import DynamoDB from "aws-sdk/clients/dynamodb"
 import parser from "../all/parser"
+import ParseError from "../../../util/errors/parse-error"
 
 export const handler = async (event, ctx) => {
     const parsed = parser(event)

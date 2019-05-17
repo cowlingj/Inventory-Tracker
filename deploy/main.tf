@@ -41,6 +41,13 @@ module "api-gateway" {
     delete_list = "${module.lambda.lambda_arns["delete_list"]}"
     get_report = "${module.lambda.lambda_arns["get_report"]}"
   }
+  lambda_names = {
+    get_list = "${module.lambda.lambda_names["get_list"]}"
+    put_list = "${module.lambda.lambda_names["put_list"]}"
+    post_list = "${module.lambda.lambda_names["post_list"]}"
+    delete_list = "${module.lambda.lambda_names["delete_list"]}"
+    get_report = "${module.lambda.lambda_names["get_report"]}"
+  }
 }
 
 module "config-file" {

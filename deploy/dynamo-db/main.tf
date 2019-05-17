@@ -1,10 +1,11 @@
 resource "aws_dynamodb_table" "inventory-list-store" {
-  name = "inventory-list-store-${terraform.workspace}"
+  name = "inventory_list_store-${terraform.workspace}"
   read_capacity = 1
   write_capacity = 1
   hash_key = "id"
   tags = {
     Project = "inventory_tracker"
+    Version = "${terraform.workspace}"
   }
 
   attribute {

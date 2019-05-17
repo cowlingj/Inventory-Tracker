@@ -2,13 +2,14 @@ variable "lambda_arns" {
   type = "map"
 }
 
-variable "api_name" {
-  type = "string"
-  default = "Inventory Tracker API"
+variable "lambda_names" {
+  type = "map"
 }
 
-variable "api_description" {
-  type = "string"
-  default = "The API that the Inventory Tracker clients communicate with"
+
+locals {
+  api_name = "inventory_tracker_api-${terraform.workspace}"
+  api_description = "The API that the Inventory Tracker clients communicate with"
 }
+
 

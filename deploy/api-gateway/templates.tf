@@ -1,8 +1,8 @@
 data "template_file" "api" {
   template = "${file("${path.module}/api/api.yml")}"
   vars = {
-    title = "${var.api_name}",
-    description = "${var.api_description}",
+    title = "${local.api_name}",
+    description = "${local.api_description}",
     list_get_uri = "${var.lambda_arns["invoke_get_list"]}",
     list_post_uri = "${var.lambda_arns["invoke_post_list"]}",
     list_put_uri = "${var.lambda_arns["invoke_put_list"]}",
