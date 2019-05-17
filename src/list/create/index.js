@@ -9,17 +9,19 @@ export const handler = async (event, ctx) => {
 
     try {
         const parsed = parser(event)
-        const data = await new Promise((resolve, reject) => {
-            const updates = {
-                id: uuid.v1(),
-                name: parsed.name,
-                quantity: parsed.quantity,
-            }
+
+        const item = {
+            id: uuid.v1(),
+            name: parsed.name,
+            quantity: parsed.quantity,
+        }
+
+        await new Promise((resolve, reject) => {
 
             client.put(
                 {
                     TableName: config.tables.list,
-                    Item: updates,
+                    Item: item,
                     ConditionExpression: "attribute_not_exists(id)",
                 },
                 (err, data) => {
@@ -34,7 +36,7 @@ export const handler = async (event, ctx) => {
 
         return {
             statusCode: 200,
-            body: JSON.stringify(data),
+            body: JSON.stringify(item),
         }
     } catch (e) {
         if (e instanceof ParseError) {
