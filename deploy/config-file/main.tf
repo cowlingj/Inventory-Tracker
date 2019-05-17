@@ -3,4 +3,7 @@ resource "local_file" "postman" {
   filename = "${var.postman_dir}/secrets/environment_${terraform.workspace}.json"
 }
 
-# todo local file for outputs
+resource "local_file" "client_config" {
+  sensitive_content = "${data.template_file.client_config.rendered}"
+  filename = "${var.build_dir}/secrets/list-client.json"
+}

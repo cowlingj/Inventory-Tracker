@@ -49,6 +49,8 @@ module "config-file" {
   base_url = "${module.api-gateway.base_url}"
   postman_dir = "${var.postman_dir}"
   clients_dir = "${var.clients_dir}"
+  build_dir = "${var.build_dir}"
+  auth_name = "${module.api-gateway.auth_name}"
 }
 
 
