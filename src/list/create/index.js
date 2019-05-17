@@ -17,7 +17,6 @@ export const handler = async (event, ctx) => {
         }
 
         await new Promise((resolve, reject) => {
-
             client.put(
                 {
                     TableName: config.tables.list,
