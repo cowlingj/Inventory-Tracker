@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Get",
+			"name": "Get List",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -26,6 +26,34 @@
 					],
 					"path": [
 						"list"
+					]
+				},
+				"description": "Trigger AWS Gateway via calling the api with the api key"
+			},
+			"response": []
+		},
+		{
+			"name": "Get List Item",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/list/{{id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"list",
+						"id"
 					]
 				},
 				"description": "Trigger AWS Gateway via calling the api with the api key"

@@ -4,11 +4,11 @@ import parser from "./parser"
 import ParseError from "../../../util/errors/parse-error"
 
 export const handler = async (event, ctx) => {
-    const parsed = parser(event)
-
-    const client = new DynamoDB.DocumentClient()
-
     try {
+        const parsed = parser(event)
+
+        const client = new DynamoDB.DocumentClient()
+
         const data = await new Promise((resolve, reject) => {
             client.scan(
                 {

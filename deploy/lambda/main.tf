@@ -17,6 +17,25 @@ resource "aws_iam_role_policy_attachment" "attach_role_to_policy" {
   policy_arn = "${aws_iam_policy.lambda_policy.arn}"
 }
 
+resource "aws_lambda_function" "get_list_item" {
+  filename         = "${path.root}/${var.build_dir}/get-list-item.zip"
+  function_name    = "inventory_list_get_list_item-${terraform.workspace}"
+  role             = "${aws_iam_role.lambda_role.arn}"
+  handler          = "get-list-item.handler"
+  source_code_hash = "${filebase64sha256("${path.root}/${var.build_dir}/get-list-item.zip")}"
+  runtime          = "nodejs8.10"
+  tags = {
+    Project = "inventory_tracker"
+    Version = "${terraform.workspace}"
+  }
+
+  environment = {
+    variables = {
+      LIST_TABLE_NAME = "${var.list_table_name}"
+    }
+  }
+}
+
 resource "aws_lambda_function" "get_list" {
   filename         = "${path.root}/${var.build_dir}/get-list.zip"
   function_name    = "inventory_list_get_list-${terraform.workspace}"

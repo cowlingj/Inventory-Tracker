@@ -3,11 +3,11 @@ import ParseError from "../../../util/errors/parse-error"
 export default function(event) {
     if (
         !event ||
-        !event.queryStringParameters ||
-        !event.queryStringParameters.id
+        !event.pathParameters ||
+        !event.pathParameters.id
     ) {
-        throw new ParseError('cannot find query string parameter "id"')
+        throw new ParseError('cannot find path parameter "id"')
     }
 
-    return { id: event.queryStringParameters.id }
+    return { id: event.pathParameters.id }
 }
